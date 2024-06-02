@@ -51,12 +51,14 @@ export default class TodoList extends Component {
 
 
     editTodo(todoId) {
-        let getIndex = this.state.todos.findIndex((todo) => {
-            return todo.id == todoId
-        })
+
         let currentTodo = [...this.state.todos]
-        let completed = currentTodo[getIndex].completed
-        currentTodo[getIndex].completed = !completed
+        currentTodo.forEach((todo) => {
+
+            if (todo.id == todoId) {
+                todo.completed = !todo.completed
+            }
+        })
         this.setState({
             todos: currentTodo
         })
@@ -67,10 +69,10 @@ export default class TodoList extends Component {
         this.setState({
             status: event.target.value
         })
-            
+
     }
     render() {
-        let statusFilter=this.state.status
+        let statusFilter = this.state.status
         return (
             <>
                 <Header />
@@ -91,17 +93,17 @@ export default class TodoList extends Component {
                 <div className="todo-container">
                     <ul className="todo-list">
 
-                      {statusFilter=='all' && this.state.todos.map((todo) => (
+                        {statusFilter == 'all' && this.state.todos.map((todo) => (
                             <Todo {...todo} key={todo.id} removeTodo={this.removeTodo} status={this.editTodo} />
                         ))}
 
-                        {statusFilter=='completed' && this.state.todos.filter((todo)=>{return todo.completed}).map((todo)=>(
-                              <Todo {...todo} key={todo.id} removeTodo={this.removeTodo} status={this.editTodo} />
+                        {statusFilter == 'completed' && this.state.todos.filter((todo) => todo.completed).map((todo) => (
+                            <Todo {...todo} key={todo.id} removeTodo={this.removeTodo} status={this.editTodo} />
                         ))}
 
-                        {statusFilter=='uncompleted' && this.state.todos.filter((todo)=>{return todo.completed==false}).map((todo)=>(
-                                                    <Todo {...todo} key={todo.id} removeTodo={this.removeTodo} status={this.editTodo} />
-                                                ))}
+                        {statusFilter == 'uncompleted' && this.state.todos.filter((todo) => !todo.completed).map((todo) => (
+                            <Todo {...todo} key={todo.id} removeTodo={this.removeTodo} status={this.editTodo} />
+                        ))}
                     </ul>
                 </div>
             </>

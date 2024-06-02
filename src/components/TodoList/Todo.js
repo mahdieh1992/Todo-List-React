@@ -17,7 +17,7 @@ export default class Todo extends Component {
         return (
             // 'completed' class for completed todos
             <div className='todo' style={{ display: 'flex' }}>
-                     {completed ? <li className="todo-item completed" >{title}</li> : <li className="todo-item" >{title}</li>}
+                <li className={completed ? "todo-item completed" : "todo-item"} >{title}</li>
 
 
                 <button className="check-btn" onClick={this.statusHandle.bind(this, id)}>
