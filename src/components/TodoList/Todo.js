@@ -1,33 +1,32 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class Todo extends Component {
+export default function Todo (props){
 
 
-    remove(todoId) {
-        this.props.removeTodo(todoId)
-
-    }
-    statusHandle(todoId) {
-        this.props.status(todoId)
+    const remove=(todoId)=> {
+        props.removeTodo(todoId)
 
     }
+    const statusHandle=(todoId)=> {
+        props.status(todoId)
 
-    render() {
-        let { id, title, completed } = this.props
+    }
+
+
+        let { id, title, completed } = props
         return (
             // 'completed' class for completed todos
             <div className='todo' style={{ display: 'flex' }}>
                 <li className={completed ? "todo-item completed" : "todo-item"} >{title}</li>
 
 
-                <button className="check-btn" onClick={this.statusHandle.bind(this, id)}>
+                <button className="check-btn" onClick={()=>statusHandle(id)}>
                     <i className="fas fa-check" aria-hidden="true" ></i>
                 </button>
 
-                <button className="trash-btn" onClick={this.remove.bind(this, id)}>
+                <button className="trash-btn" onClick={()=>remove(id)}>
                     <i className="fas fa-trash" aria-hidden="true"></i>
                 </button>
             </div>
         )
-    }
 }

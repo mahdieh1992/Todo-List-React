@@ -1,13 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class Header extends Component {
-    render() {
-        return (
+export default function Header() {
 
-            <header>
-                <h1>Todo List</h1>
-            </header>
+    return (
 
-        )
-    }
+        <header>
+            <h1>Todo List</h1>
+        </header>
+
+    )
 }
